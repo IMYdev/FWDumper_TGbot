@@ -1,6 +1,10 @@
 # Importing necessary modules
 from info import *
+import random
 import os
+
+# Methods available to use for dumping the FW
+dump_methods = ["dump_crave.sh", "dump_gh_actions.sh"]
 
 # Setting up variables for group ID and group URL
 request_id = "requests group id here (the group that you want the bot to work in)"
@@ -28,9 +32,9 @@ def request(m):
     try:
         # Extract the URL from the user's message
         URL = m.text.split()[1]
-        
-        # Execute a script with the URL as an argument
-        result = os.system(f'bash dump.sh {URL}')
+        dump_method = random.choice(dump_methods)
+        # Execute one of the dumping scripts with the URL as an argument
+        result = os.system(f'bash {dump_method} {URL}')
         
         # Check the result of the script execution
         if result == 0:
